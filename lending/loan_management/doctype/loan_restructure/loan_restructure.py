@@ -388,6 +388,8 @@ class LoanRestructure(AccountsController):
 			filters["loan_disbursement"] = self.loan_disbursement
 
 		schedule = frappe.db.get_value("Loan Repayment Schedule", filters, "name")
+		if not schedule:
+			return
 
 		doc = frappe.get_doc("Loan Repayment Schedule", schedule)
 		doc.flags.ignore_links = True
